@@ -1,42 +1,472 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*:focus {
+  outline: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+.header-wrapper ul {
+  display: flex;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.header-wrapper ul li {
+  list-style-type: none;
+  padding: 5px;
 }
 
-* {
-  box-sizing: border-box;
+.header-wrapper ul li a {
+  text-decoration: none;
+  padding: 5px;
+}
+
+.header-wrapper ul li button {
+  background-color: rgb(240, 96, 96);
+  padding: 5px;
+  color: white;
+  font-size: 10px;
+}
+
+.footer-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+  background-color: aliceblue;
+}
+
+
+
+
+.input-wrapper {
+  margin: 10;
+}
+
+.input-field {
+  width: 200px;
+  height: 30px;
+}
+
+.button {
+  width: 200px;
+  height: 30px;
+  border: solid white 1px;
+  cursor: pointer;
+}
+
+.container {
+  text-align: center;
+}
+
+.button-link {
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  color: burlywood;
+  margin: 20px;
+}
+
+.input-error {
+  position: absolute;
+  padding: 8px;
+  color: red;
+  font-size: 10px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+table td button {
+  margin: 5px;
+}
+
+table img {
+  width: 80px;
+}
+
+.main-page-banner,
+.restaurant-page-banner {
+  background-image: url("https://a.storyblok.com/f/88809/1150x450/30a9c4f9a6/igevia_header_fastfood01_450.jpg");
+  background-color: rgb(0, 0, 0, 0.6);
+  background-blend-mode: color;
+  padding: 30px;
+  height: 230px;
+  color: white;
+  text-align: center;
+}
+
+.main-page-banner .input-wrapper {
+  background-color: white;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: auto;
+  width: 50%;
+}
+
+.main-page-banner .select-input {
+  height: 40px;
+  border: none;
+  width: 25%;
+  padding-left: 15px;
+
+}
+
+.main-page-banner .search-input {
+  height: 40px;
+  border: none;
+  width: 45%;
+  border-left: 1px solid #ccc;
+  padding-left: 15px;
+}
+
+.location-list {
+  color: black;
+  list-style-type: none;
+  text-align: left;
+  position: absolute;
+  background-color: #fff;
   padding: 0;
   margin: 0;
+  margin-left: -5px;
+  border: 1px solid #ccc;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+
+.location-list li {
+
+  width: 190px;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.restaurant-list-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+
+.restaurant-wrapper {
+  width: 45%;
+  background-color: orange;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.restaurant-wrapper .heading-wrapper,
+.restaurant-wrapper .address-wrapper {
+  padding-left: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.restaurant-wrapper h5 {
+  margin-left: 15px;
+}
+
+.restaurant-wrapper .address {
+  margin-left: 5px;
+}
+
+.restaurant-page-banner h1 {
+  font-size: 65px;
+}
+
+.detail-wrapper {
+  display: flex;
+  background-color: orange;
+}
+
+.detail-wrapper h3 {
+  width: 50%;
+}
+
+.food-item-wrapper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.food-item-wrapper .list-item {
+  color: orange;
+  font-weight: bold;
+  padding: 20px;
+  border-bottom: 1px solid orange;
+  display: flex;
+  text-transform: capitalize;
+}
+
+.food-item-wrapper .list-item button {
+  color: white;
+  border: none;
+  background-color: orange;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.food-item-wrapper .list-item img {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.food-item-wrapper .list-item .description {
+  font-weight: lighter;
+}
+
+.list-item-block-1 {
+  width: 20%;
+}
+
+.list-item-block-2 {
+  width: 80%;
+}
+
+.list-item-block-3 {
+  width: 20%;
+}
+
+.total-wrapper {
+  display: flex;
+
+  flex-wrap: wrap;
+  border-bottom: 1px solid orange;
+  padding-bottom: 20px;
+}
+
+.total-wrapper .row {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 20%;
+  color: orange;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.total-wrapper .block-1 {
+  width: 70%;
+}
+
+.total-wrapper .block-2 {
+  width: 30%;
+}
+
+
+.total-wrapper .block-2 button {
+  padding: 10px;
+  border: none;
+  background-color: orange;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+.order-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.section-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #444;
+}
+
+.user-info,
+.cart-items,
+.summary {
+  background-color: #f9f9f9;
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eaeaea;
+  color: #555;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.summary-row.total {
+  font-weight: bold;
+  font-size: 18px;
+  color: #007b3e;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.order-button-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.order-button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.order-button:hover {
+  background-color: #218838;
+}
+
+.order-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.success-msg {
+  color: green;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.error-msg {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.auth-container{
+  display: flex;
+}
+
+.login-wrapper, .signup-wrapper{
+  height: 400px;
+  border: 1px solid #ccc;
+  margin: 30px;
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+}
+
+.profileInfo {
+  background-color: #fff8f0;
+  border: 2px solid #ffa726;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(255, 167, 38, 0.2);
+  font-family: Arial, sans-serif;
+  color: #333;
+  width: 90%; /* Added for responsiveness */
+  box-sizing: border-box; /* Makes padding not overflow */
+}
+
+.profileInfo div {
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word; /* Prevents overflow */
+}
+
+.profileInfo strong {
+  color: #f57c00;
+}
+
+/* Responsive tweak for smaller screens */
+@media (max-width: 480px) {
+  .profileInfo {
+    padding: 15px;
+    font-size: 14px;
   }
+
+  .profileInfo div {
+    font-size: 14px;
+  }
+}
+
+.restaurant-profile-page {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.profile-container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-heading {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.profile-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.label {
+  font-weight: bold;
+  color: #444;
+}
+
+.value {
+  color: #666;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #999;
 }
