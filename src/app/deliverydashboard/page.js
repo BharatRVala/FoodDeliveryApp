@@ -4,22 +4,22 @@ import DeliveryHeader from "../_components/DeliveryHeader";
 import { useRouter } from "next/navigation";
 
 const Page = () => {
-    const router = useRouter()
+    const router = useRouter();
     const [myOrders, setMyOrders] = useState([]);
 
     useEffect(() => {
-        const delivery = JSON.parse(localStorage.getItem('delivery'))
+        const delivery = JSON.parse(localStorage.getItem('delivery'));
         if (!delivery) {
-            router.push('/deliverypartner')
+            router.push('/deliverypartner');
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         getMyOrders();
     }, []);
 
     const getMyOrders = async () => {
-        const deliveryData = JSON.parse(localStorage.getItem('delivery'))
+        const deliveryData = JSON.parse(localStorage.getItem('delivery'));
         let response = await fetch('/api/deliverypartners/orders/' + deliveryData._id);
         response = await response.json();
         if (response.success) {
@@ -28,50 +28,52 @@ const Page = () => {
     };
 
     const handleStatusChange = async (orderId, newStatus) => {
-        console.log("Updating:", orderId, newStatus); // 🧪 debug
-      
+        console.log("Updating:", orderId, newStatus); // ✅ DEBUG
+
         const res = await fetch('/api/order', {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ orderId, status: newStatus })
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ orderId, status: newStatus }),
         });
-      
+
         const data = await res.json();
-        console.log(data); // 🧪 debug
-      
+        console.log(data); // ✅ DEBUG
+
         if (data.success) {
-          alert("Order status updated!");
-          getMyOrders(); // refresh list
+            alert("Order status updated!");
+            getMyOrders(); // refresh list
         } else {
-          alert("Failed to update status: " + (data.message || data.error));
+            alert("Failed to update status: " + (data.message || data.error));
         }
-      };
-      
+    };
 
     return (
         <div>
             <DeliveryHeader />
-            <h1>My Order List</h1>
+            <h1>My OrderList</h1>
             {myOrders.map((item, index) => (
-                <div className="restaurant-wrapper" style={{ marginLeft: 'auto', marginRight: 'auto' }} key={index}>
-                    <h4>Name: {item.data.name}</h4>
+                <div
+                    className="restaurant-wrapper"
+                    style={{ marginLeft: 'auto', marginRight: 'auto' }}
+                    key={index}
+                >
+                    <h4>Name: {item?.data?.name}</h4>
                     <div>Amount: {item.amount}</div>
-                    <div>Address: {item.data.fullAddress}</div>
+                    <div>Address: {item?.data?.fullAddress}</div>
                     <div>Status: {item.status}</div>
 
                     <div>
                         Update Status:
                         <select
-  value={item.status}
-  onChange={(e) => handleStatusChange(item._id, e.target.value)}
->
-  <option value="Preparing">Preparing</option>
-  <option value="On the Way">On the Way</option>
-  <option value="Delivered">Delivered</option>
-</select>
-
+                            value={item.status}
+                            onChange={(e) => handleStatusChange(item._id, e.target.value)}
+                        >
+                            <option value="Preparing">Preparing</option>
+                            <option value="On the Way">On the Way</option>
+                            <option value="Delivered">Delivered</option>
+                        </select>
                     </div>
                 </div>
             ))}

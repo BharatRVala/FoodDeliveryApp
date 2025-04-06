@@ -62,23 +62,23 @@ export async function POST(req) {
   
   export async function PATCH(req) {
     await mongoose.connect(connectionStr);
-  
+
     try {
-      const { orderId, status } = await req.json();
-  
-      const updatedOrder = await orderSchema.findByIdAndUpdate(
-        orderId,
-        { status },
-        { new: true }
-      );
-  
-      if (!updatedOrder) {
-        return NextResponse.json({ success: false, message: "Order not found" });
-      }
-  
-      return NextResponse.json({ success: true, result: updatedOrder });
+        const { orderId, status } = await req.json();
+
+        const updatedOrder = await orderSchema.findByIdAndUpdate(
+            orderId,
+            { status },
+            { new: true }
+        );
+
+        if (!updatedOrder) {
+            return NextResponse.json({ success: false, message: "Order not found" });
+        }
+
+        return NextResponse.json({ success: true, result: updatedOrder });
     } catch (err) {
-      console.error("ORDER PATCH ERROR:", err.message);
-      return NextResponse.json({ success: false, error: err.message });
+        console.error("ORDER PATCH ERROR:", err.message);
+        return NextResponse.json({ success: false, error: err.message });
     }
-  }
+}
