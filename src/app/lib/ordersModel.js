@@ -8,7 +8,12 @@ const orderModel = new mongoose.Schema({
     resto_id: mongoose.Schema.Types.ObjectId,
     deliveryBoy_id: mongoose.Schema.Types.ObjectId,
     status: String,
-    amount: String
+    amount: String,
+    status: {
+      type: String,
+      enum: ["Preparing", "On the Way", "Delivered"],
+      default: "Preparing"
+    },
 },
 {
     timestamps: true 
