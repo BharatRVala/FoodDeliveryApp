@@ -24,7 +24,7 @@ const AddFoodItem = () => {
         if (restaurantData) {
             resto_id = restaurantData._id;
         }
-        let response = await fetch("http://localhost:3000/api/restaurant/foods", {
+        let response = await fetch("/api/restaurant/foods", {
             method: "POST",
             body: JSON.stringify({ name, price, img_path: path, description, resto_id})
         })

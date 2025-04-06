@@ -56,7 +56,7 @@ const Page = () => {
         const foodItemsIds = cartStorage.map(item => item._id).join(',');
         const foodNames = cartStorage.map(item => item.name).join(',');
         const resto_id = cartStorage[0]?.resto_id || null; 
-        let deliveryBoyResponse= await fetch('http://localhost:3000/api/deliverypartners/'+city);
+        let deliveryBoyResponse= await fetch('/api/deliverypartners/'+city);
         deliveryBoyResponse =await deliveryBoyResponse.json();
        let deliveryBoyIds=deliveryBoyResponse.result.map((item)=>item._id);
        let deliveryBoy_id=deliveryBoyIds[Math.floor(Math.random()*deliveryBoyIds.length)]
@@ -79,7 +79,7 @@ const Page = () => {
         };
 
         try {
-            const res = await fetch("http://localhost:3000/api/order", {
+            const res = await fetch("/api/order", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

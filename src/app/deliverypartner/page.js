@@ -25,7 +25,7 @@ const Page = () => {
 
     const loginHandle = async () => {
         console.log(mobile, password);
-        let response = await fetch('http://localhost:3000/api/deliverypartners/login', {
+        let response = await fetch('/api/deliverypartners/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const Page = () => {
 
     const handleSignup = async () => {
         console.log(name, mobile, city, address, password, confirmPassword);
-        let response = await fetch('http://localhost:3000/api/deliverypartners/signup',
+        let response = await fetch('/api/deliverypartners/signup',
             {
                 method: 'post',
                 body: JSON.stringify({ name, mobile, city, address, password })

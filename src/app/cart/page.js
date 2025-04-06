@@ -68,7 +68,7 @@ const Page = () => {
         let restaurantCity = "";
     
         try {
-            const res = await fetch(`http://localhost:3000/api/restaurant?id=${restoId}`);
+            const res = await fetch(`/api/restaurant?id=${restoId}`);
             const data = await res.json();
     
             if (data.success && data.result?.city) {

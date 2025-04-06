@@ -14,7 +14,7 @@ const Page = () => {
     const getMyOrders = async () => {
 const userStorage= JSON.parse(localStorage.getItem('user'))
 setUser(userStorage);
-        let response = await fetch('http://localhost:3000/api/order?id='+userStorage._id);
+        let response = await fetch('/api/order?id='+userStorage._id);
         response = await response.json();
         if (response.success) {
             setMyOrders(response.result)
