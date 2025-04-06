@@ -68,7 +68,7 @@ const Page = () => {
                         Update Status:
                         <select
                             value={item.status}
-                            onChange={(e) => handleStatusChange(67f2747348818424976f2728)}
+                            onChange={(e) => handleStatusChange('67f2747348818424976f2728')}
                         >
                             <option value="Preparing">Preparing</option>
                             <option value="On the Way">On the Way</option>
