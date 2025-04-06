@@ -65,7 +65,7 @@ const Page = () => {
         return false
        }
         
-        const status = "confirm";
+       
         const amount = totalAmount.toFixed(2);
 
         const orderPayload = {
@@ -74,7 +74,7 @@ const Page = () => {
             foodNames,
             resto_id,
             deliveryBoy_id,
-            status,
+           
             amount
         };
 
