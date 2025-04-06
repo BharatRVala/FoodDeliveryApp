@@ -28,30 +28,27 @@ const Page = () => {
     };
 
     const handleStatusChange = async (orderId, newStatus) => {
-        try {
-            const res = await fetch('/api/order', {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    orderId,
-                    status: newStatus
-                })
-            });
-
-            const data = await res.json();
-            if (data.success) {
-                alert("Status updated!");
-                getMyOrders(); // Refresh the list after update
-            } else {
-                alert("Failed to update status");
-            }
-        } catch (err) {
-            console.error("PATCH error:", err);
-            alert("Something went wrong");
+        console.log("Updating:", orderId, newStatus); // 🧪 debug
+      
+        const res = await fetch('/api/order', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ orderId, status: newStatus })
+        });
+      
+        const data = await res.json();
+        console.log(data); // 🧪 debug
+      
+        if (data.success) {
+          alert("Order status updated!");
+          getMyOrders(); // refresh list
+        } else {
+          alert("Failed to update status: " + (data.message || data.error));
         }
-    };
+      };
+      
 
     return (
         <div>
@@ -67,13 +64,14 @@ const Page = () => {
                     <div>
                         Update Status:
                         <select
-                            value={item.status}
-                            onChange={(e) => handleStatusChange(item._id, e.target.value)}
-                        >
-                            <option value="Preparing">Preparing</option>
-                            <option value="On the Way">On the Way</option>
-                            <option value="Delivered">Delivered</option>
-                        </select>
+  value={item.status}
+  onChange={(e) => handleStatusChange(item._id, e.target.value)}
+>
+  <option value="Preparing">Preparing</option>
+  <option value="On the Way">On the Way</option>
+  <option value="Delivered">Delivered</option>
+</select>
+
                     </div>
                 </div>
             ))}
