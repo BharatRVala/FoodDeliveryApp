@@ -59,17 +59,33 @@ export async function POST(req) {
     return NextResponse.json({ result, success });
   }
   
-  
-  export async function PATCH(req) {
+  const ALLOWED_STATUSES = {
+    preparing: "Preparing",
+    "on the way": "On the Way",
+    delivered: "Delivered",
+};
+
+export async function PATCH(req) {
     await mongoose.connect(connectionStr);
 
     try {
         const { orderId, status } = await req.json();
 
+        // Normalize status input
+        const normalized = status.trim().toLowerCase();
+        const formattedStatus = ALLOWED_STATUSES[normalized];
+
+        if (!formattedStatus) {
+            return NextResponse.json({
+                success: false,
+                error: `Invalid status. Allowed values: ${Object.values(ALLOWED_STATUSES).join(", ")}.`,
+            });
+        }
+
         const updatedOrder = await orderSchema.findByIdAndUpdate(
             orderId,
-            { status },
-            { new: true }
+            { status: formattedStatus },
+            { new: true, runValidators: true }
         );
 
         if (!updatedOrder) {
