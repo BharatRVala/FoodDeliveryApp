@@ -68,7 +68,6 @@ export async function GET(req) {
   return NextResponse.json({ result, success });
 }
 
-// PATCH - Update order status
 export async function PATCH(req) {
   await mongoose.connect(connectionStr);
 
@@ -82,27 +81,46 @@ export async function PATCH(req) {
       });
     }
 
-    // Find exact match (case-sensitive) from ALLOWED_STATUSES
-    const matchedStatus = ALLOWED_STATUSES.find(
-      (s) => s === status
-    );
+    const ALLOWED_STATUSES = ["Preparing", "On the Way", "Delivered", "Failed to Deliver"];
 
-    if (!matchedStatus) {
+    // Check if the new status is valid
+    if (!ALLOWED_STATUSES.includes(status)) {
       return NextResponse.json({
         success: false,
         error: `Invalid status. Allowed values: ${ALLOWED_STATUSES.join(", ")}`,
       });
     }
 
-    const updatedOrder = await orderSchema.findByIdAndUpdate(
-      orderId,
-      { status: matchedStatus },
-      { new: true, runValidators: true }
-    );
+    const existingOrder = await orderSchema.findById(orderId);
 
-    if (!updatedOrder) {
+    if (!existingOrder) {
       return NextResponse.json({ success: false, message: "Order not found" });
     }
+
+    const currentStatus = existingOrder.status;
+
+    // Define transition rules
+    const VALID_TRANSITIONS = {
+      "Preparing": ["On the Way"],
+      "On the Way": ["Delivered", "Failed to Deliver"],
+      "Delivered": [],
+      "Failed to Deliver": [],
+    };
+
+    // Check if new status is allowed
+    if (!VALID_TRANSITIONS[currentStatus].includes(status)) {
+      return NextResponse.json({
+        success: false,
+        error: `Invalid transition from "${currentStatus}" to "${status}"`,
+      });
+    }
+
+    // Perform update
+    const updatedOrder = await orderSchema.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true, runValidators: true }
+    );
 
     return NextResponse.json({ success: true, result: updatedOrder });
   } catch (err) {

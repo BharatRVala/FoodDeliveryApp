@@ -23,7 +23,7 @@ const DeliveryHeader = () => {
           <Link href="/deliverydashboard">Orders</Link>
         </li>
         <li>
-          <Link href="/">Profile</Link>
+          <Link href="/deliverydashboard/profile">Profile</Link>
         </li>
         <li>
           <button

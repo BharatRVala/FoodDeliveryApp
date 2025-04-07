@@ -777,3 +777,37 @@ table img {
   font-size: 14px;
   margin-top: 5px;
 }
+
+.delivery-profile-container {
+  padding: 20px;
+}
+.profile-main-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.delivery-info-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.delivery-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+.detail-label {
+  font-weight: bold;
+  color: #555;
+}
+.detail-value {
+  color: #333;
+}
+.full-width {
+  grid-column: span 2;
+}
