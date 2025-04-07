@@ -17,9 +17,15 @@ export async function GET(req, res) {
             result.map(async (item) => {
                 let restoInfo = {};
                 restoInfo.data = await RestaurantSchema.findOne({ _id: item.resto_id });
+                restoInfo.foodNames = item.foodNames;
                 restoInfo.amount = item.amount;
                 restoInfo.status = item.status;
-                restoInfo.orderId = item._id; // ✅ Add orderId here
+                restoInfo.orderId = item._id;
+                restoInfo.createdAtIST = new Date(item.createdAt).toLocaleString(
+                    "en-IN",
+                    { timeZone: "Asia/Kolkata" }
+                  );
+          
                 return restoInfo;
             })
         );

@@ -71,6 +71,8 @@ const Page = () => {
         >
           <h4 className="text-lg font-bold">Name: {item.data.name}</h4>
           <p><strong>Order Id:</strong> {item.orderId}</p>
+          <p><strong>FoodNames:</strong> {item.foodNames}</p>
+          
           <p><strong>Amount:</strong> ₹{item.amount}</p>
           <p><strong>Address:</strong> {item.data.fullAddress}</p>
           <p><strong>Status:</strong> <span className="text-blue-600">{item.status}</span></p>
@@ -88,6 +90,7 @@ const Page = () => {
   <option value="Delivered">Delivered</option>
 </select>
           </div>
+          <p><strong>Order Time:</strong> {item.createdAtIST}</p>
         </div>
       ))}
     </div>

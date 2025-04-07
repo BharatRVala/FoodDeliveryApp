@@ -1,87 +1,106 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const AddFoodItem = () => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [path, setPath] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState(false);
+  const router = useRouter();
 
-    const [name, setName] = useState("")
-    const [price, setPrice] = useState("")
-    const [path, setPath] = useState("")
-    const [description, setDescription] = useState("")
-    const [error, setError]=useState(false)
-    const router =useRouter();
-
-    const handleAddFoodItem = async () => {
-        console.log(name, price, path, description);
-        if(!name || !price || !path || !description){
-            setError(true)
-            return false
-        }
-        else{
-            setError(false)
-        }
-        let resto_id;
-        const restaurantData = JSON.parse(localStorage.getItem("RestaurantUser"));
-        if (restaurantData) {
-            resto_id = restaurantData._id;
-        }
-        let response = await fetch("/api/restaurant/foods", {
-            method: "POST",
-            body: JSON.stringify({ name, price, img_path: path, description, resto_id})
-        })
-
-        response = await response.json();
-        if(response.success){
-            alert("food item added")
-            router.push('/restaurant/dashboard')
-        }
-        else{
-            alert("food item not added")
-        }
-
+  const handleAddFoodItem = async () => {
+    if (!name || !price || !path || !description) {
+      setError(true);
+      return;
+    } else {
+      setError(false);
     }
 
-    return (
-        <div className="container">
-            <h1>Add new Food</h1>
-            <div className="input-wrapper">
-                <input type="text" className="input-field" placeholder="enter food name"
-                    value={name} onChange={(e) => setName(e.target.value)}/>
-{
-    error && !name && <span className="input-error">Plase enter valid name</span>
-}
+    const restaurantData = JSON.parse(localStorage.getItem("RestaurantUser"));
+    const resto_id = restaurantData?._id;
 
-            </div>
+    let response = await fetch("/api/restaurant/foods", {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        price,
+        img_path: path,
+        description,
+        resto_id,
+      }),
+    });
 
-            <div className="input-wrapper">
-                <input type="text" className="input-field" placeholder="enter food price"
-                    value={price} onChange={(e) => setPrice(e.target.value)}/>
-           {
-    error && !price && <span className="input-error">Plase enter valid price</span>
-}
-            </div>
+    response = await response.json();
+    if (response.success) {
+      alert("Food item added");
+      router.push("/restaurant/dashboard");
+    } else {
+      alert("Food item not added");
+    }
+  };
 
-            <div className="input-wrapper">
-                <input type="text" className="input-field" placeholder="enter food img path"
-                    value={path} onChange={(e) => setPath(e.target.value)}/>
-            {
-    error && !path && <span className="input-error">Plase enter valid img_path</span>
-}
-            </div>
+  return (
+    <div className="add-food-container">
+      <h1 className="title">Add New Food Item</h1>
 
-            <div className="input-wrapper">
-                <input type="text" className="input-field" placeholder="enter food description"
-                    value={description} onChange={(e) => setDescription(e.target.value)}/>
-            {
-    error && !description && <span className="input-error">Plase enter valid description</span>
-}
-            </div>
-
-            <div className="input-wrapper">
-                <button className="button" onClick={handleAddFoodItem}>Add Food Item</button>
-            </div>
-
+      <div className="form-grid">
+        <div className="form-group">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter food name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          {error && !name && <span className="error-text">Please enter a valid name</span>}
         </div>
-    )
-}
+
+        <div className="form-group">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter food price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+          {error && !price && <span className="error-text">Please enter a valid price</span>}
+        </div>
+
+        <div className="form-group">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter image path"
+            value={path}
+            onChange={(e) => setPath(e.target.value)}
+          />
+          {error && !path && <span className="error-text">Please enter a valid image path</span>}
+        </div>
+
+        <div className="form-group full-width">
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Enter food description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          {error && !description && (
+            <span className="error-text">Please enter a valid description</span>
+          )}
+        </div>
+
+        <div className="form-group full-width">
+          <button className="submit-button" onClick={handleAddFoodItem}>
+            Add Food Item
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default AddFoodItem;
