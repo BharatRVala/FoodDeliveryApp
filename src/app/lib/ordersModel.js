@@ -1,22 +1,25 @@
 const { default: mongoose } = require("mongoose");
 
 
-const orderModel = new mongoose.Schema({
+const orderModel = new mongoose.Schema(
+  {
     user_Id: mongoose.Schema.Types.ObjectId,
     foodItemsIds: String,
-    foodNames:String,
+    foodNames: String,
     resto_id: mongoose.Schema.Types.ObjectId,
     deliveryBoy_id: mongoose.Schema.Types.ObjectId,
-   
+
     amount: String,
     status: {
       type: String,
-      enum: ["Preparing", "On the Way", "Delivered"],
-      default: "Preparing"
+      enum: ["Preparing", "On the Way", "Delivered", "Failed to Deliver"],
+      default: "Preparing",
     },
-},
-{
-    timestamps: true 
-  })
+  },
+  {
+    timestamps: true,
+  }
+);
+
 
 export const orderSchema = mongoose.models.orders || mongoose.model("orders", orderModel);
