@@ -2,39 +2,8 @@
   outline: none;
 }
 
-.header-wrapper {
-  display: flex;
-  justify-content: space-between;
-}
-
-.header-wrapper ul {
-  display: flex;
-}
-
-.header-wrapper ul li {
-  list-style-type: none;
-  padding: 5px;
-}
-
-.header-wrapper ul li a {
-  text-decoration: none;
-  padding: 5px;
-}
-
-.header-wrapper ul li button {
-  background-color: rgb(240, 96, 96);
-  padding: 5px;
-  color: white;
-  font-size: 10px;
-}
-
-
-
-
-
-
 .input-wrapper {
-  display: flex;
+ 
   gap: 12px;
   margin-top: 20px;
 }
@@ -813,4 +782,124 @@ table img {
   text-align: center;
   font-size: 10px;
   background-color: aliceblue;
+}
+
+
+
+/* Header Styles */
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 1rem 2rem; */
+  background-color: #F9A03F; /* Main color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-wrapper .logo {
+  width: 100px;
+  height: 100px;
+}
+
+.header-wrapper .logo .logo {
+  width: 100px;
+  height: 50px;
+}
+
+.header-wrapper ul {
+  display: flex;
+  gap: 20px;
+  font-size: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-wrapper ul li {
+  font-weight: bold;
+}
+
+.header-wrapper ul li a {
+  text-decoration: none;
+  color: #FFFFFF;
+  transition: color 0.3s ease;
+}
+
+.header-wrapper ul li a:hover {
+  color: #D7F694; /* Hover color */
+}
+
+/* Customer Header */
+.customer-header-wrapper ul li a {
+  color: #FFFFFF;
+}
+
+.customer-header-wrapper ul li a:hover {
+  color: #EAEFB1; /* Hover color */
+}
+
+.customer-header-wrapper .logout-btn {
+  background-color: #CEB5A7; /* Logout button background */
+  color: #FFFFFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.customer-header-wrapper .logout-btn:hover {
+  background-color: #F7D488; /* Hover color */
+}
+
+/* Delivery Header */
+.delivery-header-wrapper ul li a {
+  color: #FFFFFF;
+}
+
+.delivery-header-wrapper ul li a:hover {
+  color: #D7F694; /* Hover color */
+}
+
+.delivery-header-wrapper .logout-btn {
+  color: #F9A03F;
+  background-color: transparent;
+  border: 1px solid #F9A03F;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.delivery-header-wrapper .logout-btn:hover {
+  background-color: #F9A03F;
+  color: #FFFFFF;
+}
+
+/* Restaurant Header */
+.restaurant-header-wrapper ul li a {
+  color: #FFFFFF;
+}
+
+.restaurant-header-wrapper ul li a:hover {
+  color: #D7F694; /* Hover color */
+}
+
+.restaurant-header-wrapper .logout-btn {
+  background-color: #CEB5A7; /* Logout button background */
+  color: #FFFFFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restaurant-header-wrapper .logout-btn:hover {
+  background-color: #F7D488; /* Hover color */
+}
+
+.loginc{
+align-items: center;
+justify-content: center;  
 }
