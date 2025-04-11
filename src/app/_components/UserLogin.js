@@ -7,29 +7,38 @@ const UserLogin = (props) => {
     const router = useRouter();
 
     const loginHandle = async () => {
-        console.log(email, password);
-        let response = await fetch('/api/user/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
+        if (!email || !password) {
+            alert("Both email and password are required!");
+            return;
+        }
 
-        response = await response.json();
-        if (response.success) {
-            const { result } = response;
-            delete result.password;
-            localStorage.setItem('user', JSON.stringify(result));
-            if(props?.redirect?.order){
-                router.push('/order')
+        try {
+            let response = await fetch('/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-            }else{
-                router.push('/');
+            response = await response.json();
+
+            if (response.success) {
+                const { result } = response;
+                delete result.password; // optional, if you want to clean up
+                localStorage.setItem('user', JSON.stringify(result));
+
+                if (props?.redirect?.order) {
+                    router.push('/order');
+                } else {
+                    router.push('/');
+                }
+            } else {
+                alert('Invalid email or password. Please try again.');
             }
-            
-        } else {
-            alert('Failed to login. Please try again with valid email and password');
+        } catch (error) {
+            console.error("Login failed:", error);
+            alert("Something went wrong. Please try again later.");
         }
     }
 
@@ -42,6 +51,7 @@ const UserLogin = (props) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="input-field"
+                    required
                 />
             </div>
             <div className="input-wrapper">
@@ -51,6 +61,7 @@ const UserLogin = (props) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="input-field"
+                    required
                 />
             </div>
             <div className="input-wrapper">

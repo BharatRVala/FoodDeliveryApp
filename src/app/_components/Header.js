@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import Restaurant from "../restaurant/page";
 
 
 const Header = () => {

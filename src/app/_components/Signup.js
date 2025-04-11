@@ -59,7 +59,7 @@ const Signup = () => {
             <div>
 
                 <div className="input-wrapper">
-                    <input type="text" placeholder="Enter email id" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" placeholder="Enter email id" required="true" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} />
                     {
                         error && !email && <span className="input-error"> Please Enter Valid Email</span>
                     }

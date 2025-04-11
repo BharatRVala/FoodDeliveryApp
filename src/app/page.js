@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 import CustomerHeader from "./_components/CustomerHeader";
 import Footer from "./_components/Footer";
@@ -10,9 +10,9 @@ export default function Home() {
   const [showLocation, setShowLocation] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  
   useEffect(() => {
     const restaurantUser = localStorage.getItem("RestaurantUser");
     const deliveryUser = localStorage.getItem("delivery");
@@ -38,6 +38,7 @@ export default function Home() {
   };
 
   const loadRestaurants = async (params = {}) => {
+    setLoading(true); 
     let url = "/api/customer";
     const queryParams = [];
 
@@ -63,6 +64,8 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching restaurants:", error);
     }
+
+    setLoading(false); // stop loading
   };
 
   const handleListItem = (item) => {
@@ -109,25 +112,35 @@ export default function Home() {
           />
         </div>
       </div>
+
       <div className="restaurant-list-container">
-        {restaurants.map((item, index) => (
-          <div
-            key={item._id || index}
-            onClick={() => router.push('explore/' + item.name + "?id=" + item._id)}
-            className="restaurant-wrapper"
-          >
-            <div className="heading-wrapper">
-              <h3>{item.name}</h3>
-              <h5>Contact: {item.phone}</h5>
-            </div>
-            <div className="address-wrapper">
-              <div>{item.city},</div>
-              <div className="address">
-                {item.fullAddress}, Email: {item.email}
+        {loading ? (
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
+            <p>Loading restaurants...</p>
+          </div>
+        ) : restaurants.length === 0 ? (
+          <p className="no-orders-message">No restaurants found</p>
+        ) : (
+          restaurants.map((item, index) => (
+            <div
+              key={item._id || index}
+              onClick={() => router.push('explore/' + item.name + "?id=" + item._id)}
+              className="restaurant-wrapper"
+            >
+              <div className="heading-wrapper">
+                <h3>{item.name}</h3>
+                <h5>Contact: {item.phone}</h5>
+              </div>
+              <div className="address-wrapper">
+                <div>{item.city},</div>
+                <div className="address">
+                  {item.fullAddress}, Email: {item.email}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <Footer />
     </main>
